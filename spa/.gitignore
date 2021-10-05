@@ -1,0 +1,7 @@
+## React
+# note_modules for any directory
+node_modules/
+
+## production code
+dist/*
+
