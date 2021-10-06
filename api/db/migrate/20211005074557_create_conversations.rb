@@ -2,7 +2,7 @@ class CreateConversations < ActiveRecord::Migration[6.1]
   def change
     create_table(:conversations, id: false) do |t|
       t.string :id, primary_key: true
-      t.text :content
+      t.text :content, null: false
       t.string :background_image_path
       t.timestamps
 

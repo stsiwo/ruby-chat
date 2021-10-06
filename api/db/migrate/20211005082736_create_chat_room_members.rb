@@ -1,8 +1,8 @@
 class CreateChatRoomMembers < ActiveRecord::Migration[6.1]
   def change
     create_table(:chat_room_members, id: false) do |t|
-      t.timestamp :last_online_at
-      t.boolean :is_owner
+      t.timestamp :last_online_at, null: false, default: -> { 'CURRENT_TIMESTAMP'}
+      t.boolean :is_owner, null: false, default: 0
       t.timestamps
       t.references :user, type: :string, limit: 11, null: false, foregin_key: true
       t.references :chat_room, type: :string, limit: 11, null: false, foregin_key: true

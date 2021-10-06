@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2021_10_05_082736) do
 
   create_table "chat_room_members", primary_key: ["user_id", "chat_room_id"], charset: "utf8mb4", force: :cascade do |t|
-    t.timestamp "last_online_at"
-    t.boolean "is_owner"
+    t.timestamp "last_online_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.boolean "is_owner", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "user_id", limit: 11, null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_10_05_082736) do
   end
 
   create_table "chat_rooms", id: :string, charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "background_image_path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 2021_10_05_082736) do
   end
 
   create_table "content_types", id: :string, charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "conversations", id: :string, charset: "utf8mb4", force: :cascade do |t|
-    t.text "content"
+    t.text "content", null: false
     t.string "background_image_path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -52,19 +52,20 @@ ActiveRecord::Schema.define(version: 2021_10_05_082736) do
   end
 
   create_table "user_types", id: :string, charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", id: :string, charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "email"
     t.string "password"
     t.string "avatar_image_path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "user_type_id", limit: 11, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
   end
 
