@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_10_05_082736) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "conversations", id: :string, charset: "utf8mb4", force: :cascade do |t|
+  create_table "messages", id: :string, charset: "utf8mb4", force: :cascade do |t|
     t.text "content", null: false
     t.string "background_image_path"
     t.datetime "created_at", precision: 6, null: false
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 2021_10_05_082736) do
     t.string "user_id", limit: 11, null: false
     t.string "chat_room_id", limit: 11, null: false
     t.string "content_type_id", limit: 11, null: false
-    t.index ["chat_room_id"], name: "index_conversations_on_chat_room_id"
-    t.index ["content_type_id"], name: "index_conversations_on_content_type_id"
-    t.index ["user_id"], name: "index_conversations_on_user_id"
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
+    t.index ["content_type_id"], name: "index_messages_on_content_type_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "user_types", id: :string, charset: "utf8mb4", force: :cascade do |t|
@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 2021_10_05_082736) do
   add_foreign_key "chat_room_members", "chat_rooms", on_update: :cascade, on_delete: :cascade
   add_foreign_key "chat_room_members", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "chat_rooms", "users", column: "owner_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "conversations", "chat_rooms", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "conversations", "content_types", on_update: :cascade
-  add_foreign_key "conversations", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "messages", "chat_rooms", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "messages", "content_types", on_update: :cascade
+  add_foreign_key "messages", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users", "user_types", on_update: :cascade
 end

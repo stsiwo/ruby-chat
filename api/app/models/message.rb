@@ -1,4 +1,4 @@
-class Conversation < ApplicationRecord
+class Message < ApplicationRecord
   belongs_to :user
   belongs_to :chat_room
   belongs_to :content_type
