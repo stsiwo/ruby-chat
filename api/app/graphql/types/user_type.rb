@@ -1,0 +1,12 @@
+module Types
+  class UserType < Types::BaseObject
+    field :id, ID, null: false
+    field :name, String, null: false
+    field :email, String, null: true
+    field :password, String, null: true
+    field :avatar_image_path, String, null: true
+    field :created_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :user_type_id, String, null: false
+  end
+end

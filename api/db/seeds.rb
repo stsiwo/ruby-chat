@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'nanoid'
+require 'faker'
+
+admin = UserType.create(id: Nanoid.generate(size: 11), name: "ADMIN")
+member = UserType.create(id: Nanoid.generate(size: 11), name: "MEMBER")
+
+5.times do |i|
+  User.create!(id: Nanoid.generate(size: 11), name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Name.name, user_type: member)
+end
